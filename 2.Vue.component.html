@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="https://cdn.bootcss.com/vue/2.5.17-beta.0/vue.min.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <div class="component-one">
+      组件一:
+      <component-one></component-one>
+    </div>
+    <div class="component-two">
+      组件二:
+      <component-two></component-two>
+    </div>
+  </div>
+</body>
+<script> 
+  //1.创建组件构造器
+  var obj = {
+    props: [],
+    template: '<div><p>{{extendData}}</p></div>',//最外层只能有一个大盒子,这个和<tempalte>对应规则一致
+    data: function () {
+      return {
+        extendData: '这是Vue.component传入Vue.extend注册的组件',
+      }
+    },
+  };
+
+  var Profile = Vue.extend(obj);
+
+  //2.注册组件方法一:传入Vue.extend扩展过得构造器
+  Vue.component('component-one', Profile)
+
+  //2.注册组件方法二:直接传入
+  Vue.component('component-two', obj)
+
+  //3.挂载
+  new Vue({
+    el: '#app'
+  });
+
+  //获取注册的组件 (始终返回构造器)
+  var oneComponent=Vue.component('component-one');
+  console.log(oneComponent===Profile)//true,返回的Profile构造器
+</script>
+
+</html>

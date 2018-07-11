@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="https://cdn.bootcss.com/vue/2.5.17-beta.0/vue.min.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <div class="component-one">
+      组件一:
+      <component-one></component-one>
+    </div>
+    <div class="component-two">
+      组件二:
+      <component-two></component-two>
+    </div>
+  </div>
+</body>
+<script> 
+  //1.创建组件构造器
+  var obj = {
+    props: [],
+    template: '<div><p>{{extendData}}</p></div>',//最外层只能有一个大盒子,这个和<tempalte>对应规则一致
+    data: function () {
+      return {
+        extendData: '这是component局部注册的组件',
+      }
+    },
+  };
+
+  var Profile = Vue.extend(obj);
+  
+  //3.挂载
+  new Vue({
+    el: '#app',
+    components:{
+      'component-one':Profile,
+      'component-two':obj
+    }
+  });
+
+</script>
+
+</html>

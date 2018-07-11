@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="https://cdn.bootcss.com/vue/2.5.17-beta.0/vue.min.js"></script>
+</head>
+<body>
+  <div id="app-extend"></div>
+</body>
+<script> 
+  // 创建构造器
+var Profile = Vue.extend({
+  template: '<div><p>{{extendData}}</p><p>实例传入的数据为:{{propsExtend}}</p></div>',//最外层只能有一个大盒子,这个和<tempalte>对应规则一致
+  data: function () {
+    return {
+      extendData: '这是extend扩展的数据',
+    }
+  },
+  props:['propsExtend']
+})
+// 创建 Profile 实例，并挂载到一个元素上。
+new Profile({propsData:{propsExtend:'我是实例传入的数据'}}).$mount('#app-extend')
+</script>
+</html>
